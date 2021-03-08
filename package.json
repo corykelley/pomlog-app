@@ -3,14 +3,16 @@
 	"version": "1.0.0",
 	"description": "Backend for pomlog app",
 	"main": "sever.js",
-	"author": "Cory Kelley <coryk0789@gmail.com> (https://itscorykelley.com)",
+	"author": "Cory Kelley <me@corykelley.com> (https://corykelley.com)",
 	"license": "MIT",
 	"scripts": {
 		"start": "node server.js",
 		"dev": "nodemon server.js"
 	},
 	"dependencies": {
-		"express": "^4.17.1"
+		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
+		"pg-promise": "^10.9.4"
 	},
 	"devDependencies": {
 		"morgan": "^1.10.0",
