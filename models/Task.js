@@ -6,7 +6,7 @@ class Task {
 		this.title = task.title;
 		this.description = task.description;
 		this.time_limit = task.time_limit;
-		this.start_date = task.start_date;
+		this.start_date = task.start_date || new Date();
 		this.sprints = task.sprints;
 	}
 
@@ -39,7 +39,7 @@ class Task {
 			.one(
 				`INSERT INTO tasks
         (title, description, time_limit, start_date, sprints)
-        VALUES ($/title, $/description, $/time_limit, $/start_date, $/sprints)
+        VALUES ($/title/, $/description/, $/time_limit/, $/start_date/, $/sprints/)
         RETURNING *`,
 				this
 			)
