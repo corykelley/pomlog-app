@@ -29,6 +29,46 @@ const tasksController = {
 			})
 			.catch(next);
 	},
+
+	show(req, res, next) {
+		Task.getById(req.params.id)
+			.then((task) => {
+				res.json({
+					message: 'ok',
+					task,
+				});
+				console.log(task);
+			})
+			.catch(next);
+	},
+
+	// TODO: DETERMINE WHAT NEEDS TO BE UPDATED
+	update(req, res, next) {
+		Task.getById(req.params.id)
+			.then((task) => {
+				task.update({
+					title: req.body.title,
+				});
+			})
+			.then((task) => {
+				res.json({
+					message: 'Task updated!',
+					task,
+				});
+			})
+			.catch(next);
+	},
+
+	delete(req, res, next) {
+		Task.getById(req.params.id)
+			.then((task) => task.delete())
+			.then(() => {
+				res.json({
+					message: 'Task deleted!',
+				});
+			})
+			.catch(next);
+	},
 };
 
 module.exports = tasksController;

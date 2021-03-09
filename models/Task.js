@@ -26,10 +26,10 @@ class Task {
 			.oneOrNone(
 				`SELECT * FROM tasks
         WHERE id = $1`,
-				id
+				parseInt(id)
 			)
 			.then((task) => {
-				task && new this(task);
+				if (task) return new this(task);
 				throw new Error(`Task ${id} not found!`);
 			});
 	};
@@ -48,7 +48,7 @@ class Task {
 
 	delete() {
 		return db.none(
-			`DELETE * FROM tasks
+			`DELETE FROM tasks
       WHERE id = $1`,
 			this.id
 		);
