@@ -46,6 +46,21 @@ class Task {
 			.then((task) => Object.assign(task));
 	}
 
+	update(changes) {
+		Object.assign(this, changes);
+		return db
+			.one(
+				`UPDATE tasks SET
+				title = $/title/
+			WHERE id = $/id/
+			RETURNING *`,
+				this
+			)
+			.then((task) => {
+				return Object.assign(this, task);
+			});
+	}
+
 	delete() {
 		return db.none(
 			`DELETE FROM tasks
