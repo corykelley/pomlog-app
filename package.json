@@ -2,7 +2,7 @@
 	"name": "backend",
 	"version": "1.0.0",
 	"description": "Backend for pomlog app",
-	"main": "sever.js",
+	"main": "server.js",
 	"author": "Cory Kelley <me@corykelley.com> (https://corykelley.com)",
 	"license": "MIT",
 	"scripts": {
@@ -15,6 +15,7 @@
 		"pg-promise": "^10.9.4"
 	},
 	"devDependencies": {
+		"cors": "^2.8.5",
 		"morgan": "^1.10.0",
 		"nodemon": "^2.0.7"
 	}
