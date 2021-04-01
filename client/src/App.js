@@ -4,13 +4,34 @@ import AddTask from './components/AddTask';
 function App() {
 	const [tasks, setTasks] = useState(null);
 
-	useEffect(() => {
+	const getTasks = () => {
 		fetch(`/api/tasks/`)
 			.then((res) => res.json())
 			.then((data) => {
 				setTasks(data.tasks);
 				console.log(data.tasks);
 			});
+	};
+
+	const handleSubmit = (e, data) => {
+		e.preventDefault();
+
+		fetch('/api/tasks/new', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(data),
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				console.log(data);
+				getTasks();
+			});
+	};
+
+	useEffect(() => {
+		getTasks();
 	}, []);
 
 	return (
@@ -26,7 +47,7 @@ function App() {
 						<i>Started On {task.start_date}</i>
 					</article>
 				))}
-			<AddTask />
+			<AddTask handleSubmit={handleSubmit} />
 		</>
 	);
 }

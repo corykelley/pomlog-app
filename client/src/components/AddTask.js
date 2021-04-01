@@ -1,36 +1,24 @@
 import { useState } from 'react';
 
-const AddTask = () => {
+const AddTask = ({ handleSubmit }) => {
 	const [title, setTitle] = useState(null);
 	const [description, setDescription] = useState(null);
 	const [timeLimit, setTimeLimit] = useState(0);
 	const [sprints, setSprints] = useState(0);
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-
-		fetch('/api/tasks/new', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				title,
-				description,
-				time_limit: timeLimit,
-				sprints,
-			}),
-		})
-			.then((res) => res.json())
-			.then((data) => {
-				console.log(data);
-				return data;
-			});
-	};
-
+	// UPDATE HOW WE HANDLE THE SUBMIT FUNCTION - SHOULD BE ABLE TO DELETE, POST, UPDATE, ETC.
 	return (
 		<div>
-			<form onSubmit={(e) => handleSubmit(e)}>
+			<form
+				onSubmit={(e) =>
+					handleSubmit(e, {
+						title,
+						description,
+						time_limit: timeLimit,
+						sprints,
+					})
+				}
+			>
 				<label>
 					Title:
 					<input
