@@ -15,12 +15,15 @@ function App() {
 
 	return (
 		<>
-			<h1>hey</h1>
 			{tasks &&
 				tasks.map((task) => (
 					<article key={task.id}>
 						<h2>{task.title}</h2>
 						<p>{task.description}</p>
+						<b>
+							<i>Time Limit: {task.time_limit} - </i>
+						</b>
+						<i>Started On {task.start_date}</i>
 					</article>
 				))}
 			<AddTask />

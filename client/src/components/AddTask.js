@@ -1,23 +1,25 @@
 import { useState } from 'react';
 
 const AddTask = () => {
-	const [taskInfo, setTaskInfo] = useState({
-		title: '',
-		description: '',
-		timeLimit: 0,
-		sprints: 0,
-	});
-
-	const handleChange = (e) => {
-		setTaskInfo({ [e.target.name]: e.target.value });
-	};
+	const [title, setTitle] = useState(null);
+	const [description, setDescription] = useState(null);
+	const [timeLimit, setTimeLimit] = useState(0);
+	const [sprints, setSprints] = useState(0);
 
 	const handleSubmit = (e) => {
-		alert('A form was submitted: ' + taskInfo);
+		e.preventDefault();
 
-		fetch('http://localhost:3001/api/tasks', {
+		fetch('/api/tasks/new', {
 			method: 'POST',
-			body: JSON.stringify(taskInfo),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				title,
+				description,
+				time_limit: timeLimit,
+				sprints,
+			}),
 		})
 			.then((res) => res.json())
 			.then((data) => {
@@ -28,41 +30,41 @@ const AddTask = () => {
 
 	return (
 		<div>
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={(e) => handleSubmit(e)}>
 				<label>
 					Title:
 					<input
 						type='text'
-						value={taskInfo.title}
+						value={title || ''}
 						name='title'
-						onChange={handleChange}
+						onChange={(e) => setTitle(e.target.value)}
 					/>
 				</label>
 				<label>
 					Description:
 					<input
 						type='text'
-						value={taskInfo.description}
+						value={description || ''}
 						name='description'
-						onChange={handleChange}
+						onChange={(e) => setDescription(e.target.value)}
 					/>
 				</label>
 				<label>
 					Time Limit:
 					<input
 						type='number'
-						value={taskInfo.timeLimit}
+						value={timeLimit}
 						name='timeLimit'
-						onChange={handleChange}
+						onChange={(e) => setTimeLimit(e.target.value)}
 					/>
 				</label>
 				<label>
 					Sprints:
 					<input
-						type='text'
-						value={taskInfo.sprints}
+						type='number'
+						value={sprints}
 						name='sprints'
-						onChange={handleChange}
+						onChange={(e) => setSprints(e.target.value)}
 					/>
 				</label>
 				<input type='submit' value='Submit' />

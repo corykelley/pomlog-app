@@ -1,11 +1,9 @@
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
-const cors = require('cors');
 
 const tasksRouter = require('./routes/task-routes');
 
-app.use(cors());
 app.use(morgan('short'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
