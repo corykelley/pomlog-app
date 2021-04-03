@@ -1,58 +1,56 @@
 import { useState } from 'react';
 
-const AddTask = ({ handleSubmit }) => {
-	const [title, setTitle] = useState(null);
-	const [description, setDescription] = useState(null);
-	const [timeLimit, setTimeLimit] = useState(0);
-	const [sprints, setSprints] = useState(0);
+const AddTask = ({ taskSubmit }) => {
+	const [taskInfo, setTaskInfo] = useState({
+		title: '',
+		description: '',
+		time_limit: 0,
+		sprints: 0,
+	});
 
-	// UPDATE HOW WE HANDLE THE SUBMIT FUNCTION - SHOULD BE ABLE TO DELETE, POST, UPDATE, ETC.
+	const handleChange = (e) => {
+		const name = e.target.name;
+		const val = e.target.value;
+		setTaskInfo({ ...taskInfo, [name]: val });
+	};
+
 	return (
 		<div>
-			<form
-				onSubmit={(e) =>
-					handleSubmit(e, {
-						title,
-						description,
-						time_limit: timeLimit,
-						sprints,
-					})
-				}
-			>
+			<form onSubmit={(e) => taskSubmit('POST', e, taskInfo)}>
 				<label>
 					Title:
 					<input
 						type='text'
-						value={title || ''}
+						value={taskInfo.title || ''}
 						name='title'
-						onChange={(e) => setTitle(e.target.value)}
+						onChange={handleChange}
 					/>
 				</label>
 				<label>
 					Description:
 					<input
 						type='text'
-						value={description || ''}
+						value={taskInfo.description || ''}
 						name='description'
-						onChange={(e) => setDescription(e.target.value)}
+						onChange={(e) => handleChange(e)}
 					/>
 				</label>
 				<label>
 					Time Limit:
 					<input
 						type='number'
-						value={timeLimit}
-						name='timeLimit'
-						onChange={(e) => setTimeLimit(e.target.value)}
+						value={taskInfo.time_limit}
+						name='time_limit'
+						onChange={(e) => handleChange(e)}
 					/>
 				</label>
 				<label>
 					Sprints:
 					<input
 						type='number'
-						value={sprints}
+						value={taskInfo.sprints}
 						name='sprints'
-						onChange={(e) => setSprints(e.target.value)}
+						onChange={(e) => handleChange(e)}
 					/>
 				</label>
 				<input type='submit' value='Submit' />

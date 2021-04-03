@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import AddTask from './components/AddTask';
+import TaskList from './components/TaskList';
 
 function App() {
 	const [tasks, setTasks] = useState(null);
@@ -13,21 +14,18 @@ function App() {
 			});
 	};
 
-	const handleSubmit = (e, data) => {
+	const taskSubmit = (method, e, data, id) => {
 		e.preventDefault();
-
-		fetch('/api/tasks/new', {
-			method: 'POST',
+		fetch(`/api/tasks/new/${id || ''}`, {
+			method: method,
 			headers: {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify(data),
-		})
-			.then((res) => res.json())
-			.then((data) => {
-				console.log(data);
-				getTasks();
-			});
+		}).then((res) => {
+			console.log(res.json());
+			getTasks();
+		});
 	};
 
 	useEffect(() => {
@@ -36,18 +34,8 @@ function App() {
 
 	return (
 		<>
-			{tasks &&
-				tasks.map((task) => (
-					<article key={task.id}>
-						<h2>{task.title}</h2>
-						<p>{task.description}</p>
-						<b>
-							<i>Time Limit: {task.time_limit} - </i>
-						</b>
-						<i>Started On {task.start_date}</i>
-					</article>
-				))}
-			<AddTask handleSubmit={handleSubmit} />
+			<TaskList tasks={tasks} />
+			<AddTask taskSubmit={taskSubmit} />
 		</>
 	);
 }
