@@ -14,9 +14,19 @@ const AddTask = ({ taskSubmit }) => {
 		setTaskInfo({ ...taskInfo, [name]: val });
 	};
 
+	const addTask = (e) => {
+		taskSubmit('POST', e, taskInfo);
+		setTaskInfo({
+			title: '',
+			description: '',
+			time_limit: 0,
+			sprints: 0,
+		});
+	};
+
 	return (
 		<div>
-			<form onSubmit={(e) => taskSubmit('POST', e, taskInfo)}>
+			<form onSubmit={(e) => addTask(e)}>
 				<label>
 					Title:
 					<input

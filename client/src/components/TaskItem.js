@@ -1,4 +1,4 @@
-const Task = ({ task, taskDelete }) => {
+const TaskItem = ({ task, taskDelete }) => {
 	return (
 		<article>
 			<h1>{task.title}</h1>
@@ -10,4 +10,4 @@ const Task = ({ task, taskDelete }) => {
 	);
 };
 
-export default Task;
+export default TaskItem;
