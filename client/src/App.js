@@ -28,13 +28,24 @@ function App() {
 		});
 	};
 
+	const taskDelete = (id) => {
+		fetch(`/api/tasks/${id}`, {
+			method: 'DELETE',
+		})
+			.then((res) => res.json())
+			.then((res) => {
+				console.log(res);
+				getTasks();
+			});
+	};
+
 	useEffect(() => {
 		getTasks();
 	}, []);
 
 	return (
 		<>
-			<TaskList tasks={tasks} />
+			<TaskList tasks={tasks} taskDelete={taskDelete} />
 			<AddTask taskSubmit={taskSubmit} />
 		</>
 	);
