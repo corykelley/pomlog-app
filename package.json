@@ -10,8 +10,12 @@
 		"dev": "nodemon server.js"
 	},
 	"dependencies": {
+		"@chakra-ui/react": "^1.4.2",
+		"@emotion/react": "^11",
+		"@emotion/styled": "^11",
 		"dotenv": "^8.2.0",
 		"express": "^4.17.1",
+		"framer-motion": "^4",
 		"pg-promise": "^10.9.4"
 	},
 	"devDependencies": {
