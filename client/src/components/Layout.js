@@ -12,10 +12,10 @@ const Layout = ({ children }) => {
 				py='6'
 				mb='4'
 			>
-				<Flex maxW='1200' mx='auto'>
+				<Flex maxW='1200' mx='auto' px='4'>
 					<Box p='2'>
 						<Link to='/'>
-							<Heading size='md'>Pomlog</Heading>
+							<Heading size='lg'>Pomlog</Heading>
 						</Link>
 					</Box>
 					<Spacer />
