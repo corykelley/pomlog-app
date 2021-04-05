@@ -1,54 +1,19 @@
-import { useState, useEffect } from 'react';
-// TODO: ROUTING!!!!!!
-import AddTask from './components/AddTask';
-import TaskList from './components/TaskList';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Home from './Home';
+import Task from './components/Task';
 
 function App() {
-	const [tasks, setTasks] = useState(null);
-
-	const getTasks = () => {
-		fetch(`/api/tasks/`)
-			.then((res) => res.json())
-			.then((data) => {
-				setTasks(data.tasks);
-				console.log(data.tasks);
-			});
-	};
-
-	const taskSubmit = (method, e, data, id) => {
-		e.preventDefault();
-		fetch(`/api/tasks/new/${id || ''}`, {
-			method: method,
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(data),
-		}).then((res) => {
-			console.log(res.json());
-			getTasks();
-		});
-	};
-
-	const taskDelete = (id) => {
-		fetch(`/api/tasks/${id}`, {
-			method: 'DELETE',
-		})
-			.then((res) => res.json())
-			.then((res) => {
-				console.log(res);
-				getTasks();
-			});
-	};
-
-	useEffect(() => {
-		getTasks();
-	}, []);
-
 	return (
-		<>
-			<TaskList tasks={tasks} taskDelete={taskDelete} />
-			<AddTask taskSubmit={taskSubmit} />
-		</>
+		<Router>
+			<Switch>
+				<Route path='/' exact>
+					<Home />
+				</Route>
+				<Route path='/task/:id'>
+					<Task />
+				</Route>
+			</Switch>
+		</Router>
 	);
 }
 
