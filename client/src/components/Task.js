@@ -11,14 +11,24 @@ const Task = () => {
 			.then((res) => res.json())
 			.then((data) => {
 				setTaskInfo(data.task);
+				console.log(data.task);
 			});
-	}, []);
+	}, [id]);
+
+	console.log(taskInfo);
 
 	return (
-		<article>
-			<h1>{taskInfo.title}</h1>
-			<h2>{taskInfo.description}</h2>
-		</article>
+		<>
+			{taskInfo ? (
+				<article>
+					<h1>{taskInfo.title}</h1>
+					<h2>{taskInfo.description}</h2>
+					<i>{taskInfo.start_date}</i>
+				</article>
+			) : (
+				<h3>loading...</h3>
+			)}
+		</>
 	);
 };
 

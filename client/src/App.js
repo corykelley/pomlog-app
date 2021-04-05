@@ -4,16 +4,18 @@ import Task from './components/Task';
 
 function App() {
 	return (
-		<Router>
-			<Switch>
-				<Route path='/' exact>
-					<Home />
-				</Route>
-				<Route path='/task/:id'>
-					<Task />
-				</Route>
-			</Switch>
-		</Router>
+		<>
+			<Router>
+				<Switch>
+					<Route path='/' exact>
+						<Home />
+					</Route>
+					<Route path='/tasks/:id'>
+						<Task />
+					</Route>
+				</Switch>
+			</Router>
+		</>
 	);
 }
 
