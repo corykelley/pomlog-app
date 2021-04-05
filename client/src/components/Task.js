@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import moment from 'moment';
 
 const Task = () => {
 	let { id } = useParams();
@@ -23,7 +24,7 @@ const Task = () => {
 				<article>
 					<h1>{taskInfo.title}</h1>
 					<h2>{taskInfo.description}</h2>
-					<i>{taskInfo.start_date}</i>
+					<i>{moment(taskInfo.start_date).format('LL')}</i>
 				</article>
 			) : (
 				<h3>loading...</h3>
