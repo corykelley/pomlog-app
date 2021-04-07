@@ -14,8 +14,7 @@ function Home() {
 			});
 	};
 
-	const taskSubmit = (method, e, data, id) => {
-		e.preventDefault();
+	const taskSubmit = (method, data, id) => {
 		fetch(`/api/tasks/new/${id || ''}`, {
 			method: method,
 			headers: {
