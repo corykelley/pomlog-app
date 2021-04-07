@@ -1,3 +1,4 @@
+import { Button } from '@chakra-ui/button';
 import { Formik, Form, Field } from 'formik';
 
 const AddTask = ({ taskSubmit }) => {
@@ -7,8 +8,8 @@ const AddTask = ({ taskSubmit }) => {
 				initialValues={{
 					title: '',
 					description: '',
-					time_limit: 0,
-					sprints: 0,
+					time_limit: 1,
+					sprints: 1,
 				}}
 				onSubmit={(values, actions) => {
 					setTimeout(() => {
@@ -25,20 +26,22 @@ const AddTask = ({ taskSubmit }) => {
 							type='text'
 							name='title'
 							placeholder='Take out the garbage'
+							required
 						/>
 						<label htmlFor='description'>Description:</label>
 						<Field
 							type='text'
 							name='description'
 							placeholder='It smells and it needs to go...'
+							required
 						/>
 						<label htmlFor='time_limit'>Time Limit:</label>
 						<Field type='number' name='time_limit' />
 						<label htmlFor='sprints'>Sprints:</label>
 						<Field type='number' name='sprints' />
-						<button type='submit' disabled={isSubmitting}>
+						<Button colorScheme='teal' type='submit' disabled={isSubmitting}>
 							Submit
-						</button>
+						</Button>
 					</Form>
 				)}
 			</Formik>

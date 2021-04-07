@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Button } from '@chakra-ui/button';
+import { EditIcon } from '@chakra-ui/icons';
 import { Box, Container, Flex, Heading, Spacer } from '@chakra-ui/layout';
 
 const Layout = ({ children }) => {
@@ -9,10 +9,10 @@ const Layout = ({ children }) => {
 				maxW='full'
 				borderBottom='1px'
 				borderBottomColor='gray.200'
-				py='6'
+				py='2'
 				mb='4'
 			>
-				<Flex maxW='1200' mx='auto' px='4'>
+				<Flex alignItems='center' maxW='1200' mx='auto' px='4'>
 					<Box p='2'>
 						<Link to='/'>
 							<Heading size='lg'>Pomlog</Heading>
@@ -20,10 +20,7 @@ const Layout = ({ children }) => {
 					</Box>
 					<Spacer />
 					<Box>
-						<Button colorScheme='teal' mr='4'>
-							Sign Up
-						</Button>
-						<Button colorScheme='teal'>Log in</Button>
+						<EditIcon color='teal' />
 					</Box>
 				</Flex>
 			</Container>

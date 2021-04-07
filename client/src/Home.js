@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import TaskList from './components/TaskList';
 import AddTask from './components/AddTask';
+import { Button } from '@chakra-ui/button';
 
 const customStyles = {
 	content: {
@@ -66,10 +67,14 @@ function Home() {
 		getTasks();
 	}, []);
 
+	// TODO: HOOK UP ADD TASK BUTTON IN LAYOUT/NAV!
+
 	return (
 		<>
 			<TaskList tasks={tasks} taskDelete={taskDelete} />
-			<button onClick={openModal}>Add Task</button>
+			<Button onClick={openModal} colorScheme='teal' mr='4'>
+				Add Task
+			</Button>
 			<Modal
 				isOpen={modalIsOpen}
 				onRequestClose={closeModal}
@@ -77,7 +82,9 @@ function Home() {
 				contentLabel='Example Modal'
 			>
 				<AddTask taskSubmit={taskSubmit} />
-				<button onClick={closeModal}>close</button>
+				<Button colorScheme='teal' my='4' onClick={closeModal}>
+					close
+				</Button>
 			</Modal>
 		</>
 	);
