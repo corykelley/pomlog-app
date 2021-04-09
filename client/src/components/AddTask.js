@@ -132,15 +132,15 @@ const AddTask = ({ taskSubmit, inNav }) => {
 					</ModalBody>
 				</ModalContent>
 			</Modal>
-			<Center mt='4'>
-				{inNav ? (
-					<AddIcon w={4} h={4} onClick={onOpen} cursor='pointer' />
-				) : (
+			{inNav ? (
+				<AddIcon w={4} h={4} onClick={onOpen} cursor='pointer' />
+			) : (
+				<Center mt='4'>
 					<Button colorScheme='teal' size='lg' onClick={onOpen}>
 						Add Task
 					</Button>
-				)}
-			</Center>
+				</Center>
+			)}
 		</>
 	);
 };

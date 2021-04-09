@@ -19,8 +19,9 @@ const Layout = ({ children }) => {
 						</Link>
 					</Box>
 					<Spacer />
-					<Box></Box>
-					<AddTask inNav />
+					<Box>
+						<AddTask inNav />
+					</Box>
 				</Flex>
 			</Container>
 			{children}
