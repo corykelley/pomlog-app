@@ -1,15 +1,7 @@
-import { Button, IconButton } from '@chakra-ui/button';
+import { Button } from '@chakra-ui/button';
 import { useDisclosure } from '@chakra-ui/hooks';
-import { EditIcon } from '@chakra-ui/icons';
-import {
-	Popover,
-	PopoverArrow,
-	PopoverCloseButton,
-	PopoverContent,
-	PopoverTrigger,
-} from '@chakra-ui/popover';
+import { AddIcon } from '@chakra-ui/icons';
 import { useRef } from 'react';
-import FocusLock from 'react-focus-lock';
 import { Formik, Form, Field } from 'formik';
 import { FormControl, FormLabel } from '@chakra-ui/form-control';
 import {
@@ -20,28 +12,29 @@ import {
 	NumberInputStepper,
 } from '@chakra-ui/number-input';
 import { Input } from '@chakra-ui/input';
+import { Center } from '@chakra-ui/layout';
+import {
+	Modal,
+	ModalBody,
+	ModalCloseButton,
+	ModalContent,
+	ModalFooter,
+	ModalHeader,
+	ModalOverlay,
+} from '@chakra-ui/modal';
 
-const PopoverForm = ({ taskSubmit }) => {
+const AddTask = ({ taskSubmit, inNav }) => {
 	const { onOpen, onClose, isOpen } = useDisclosure();
 	const firstFieldRef = useRef(null);
 
 	return (
 		<>
-			<Popover
-				isOpen={isOpen}
-				initialFocusRef={firstFieldRef}
-				onOpen={onOpen}
-				onClose={onClose}
-				placement='right'
-				closeOnBlur={false}
-			>
-				<PopoverTrigger>
-					<IconButton size='sm' icon={<EditIcon />} />
-				</PopoverTrigger>
-				<PopoverContent p={5}>
-					<FocusLock returnFocus persistentFocus={false}>
-						<PopoverArrow />
-						<PopoverCloseButton />
+			<Modal initialFocusRef={firstFieldRef} isOpen={isOpen} onClose={onClose}>
+				<ModalOverlay />
+				<ModalContent>
+					<ModalHeader>Add a task</ModalHeader>
+					<ModalCloseButton />
+					<ModalBody pb={6}>
 						<div>
 							<Formik
 								initialValues={{
@@ -67,6 +60,7 @@ const PopoverForm = ({ taskSubmit }) => {
 													<FormLabel htmlFor='title'>Title:</FormLabel>
 													<Input
 														{...field}
+														ref={firstFieldRef}
 														id='title'
 														placeholder='Take out the garbage'
 													/>
@@ -119,22 +113,36 @@ const PopoverForm = ({ taskSubmit }) => {
 												</FormControl>
 											)}
 										</Field>
-										<Button
-											colorScheme='teal'
-											type='submit'
-											disabled={isSubmitting}
-										>
-											Submit
-										</Button>
+										<ModalFooter>
+											<Button
+												colorScheme='teal'
+												type='submit'
+												disabled={isSubmitting}
+											>
+												Submit
+											</Button>
+											<Button ml='4' onClick={onClose}>
+												Cancel
+											</Button>
+										</ModalFooter>
 									</Form>
 								)}
 							</Formik>
 						</div>
-					</FocusLock>
-				</PopoverContent>
-			</Popover>
+					</ModalBody>
+				</ModalContent>
+			</Modal>
+			<Center mt='4'>
+				{inNav ? (
+					<AddIcon w={4} h={4} onClick={onOpen} cursor='pointer' />
+				) : (
+					<Button colorScheme='teal' size='lg' onClick={onOpen}>
+						Add Task
+					</Button>
+				)}
+			</Center>
 		</>
 	);
 };
 
-export default PopoverForm;
+export default AddTask;

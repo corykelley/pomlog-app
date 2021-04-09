@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import TaskList from './components/TaskList';
-import Popover from './components/PopOver';
+import AddTask from './components/AddTask';
 
 function Home() {
 	const [tasks, setTasks] = useState(null);
@@ -47,7 +47,7 @@ function Home() {
 	return (
 		<>
 			<TaskList tasks={tasks} taskDelete={taskDelete} />
-			<Popover taskSubmit={taskSubmit} />
+			<AddTask taskSubmit={taskSubmit} />
 		</>
 	);
 }

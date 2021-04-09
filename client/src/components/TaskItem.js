@@ -6,7 +6,7 @@ import { DeleteIcon } from '@chakra-ui/icons';
 
 const TaskItem = ({ task, taskDelete }) => {
 	return (
-		<Box borderRadius='lg' my='8' bg='tomato' w='100%' p={4} color='white'>
+		<Box borderRadius='lg' my='8' bg='tomato' w='80' p={4} color='white'>
 			<Link to={`/tasks/${task.id}`}>
 				<Heading>{task.title}</Heading>
 			</Link>

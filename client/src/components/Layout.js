@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
-import { EditIcon } from '@chakra-ui/icons';
 import { Box, Container, Flex, Heading, Spacer } from '@chakra-ui/layout';
-import { Popover } from '@chakra-ui/popover';
+import AddTask from './AddTask';
 
 const Layout = ({ children }) => {
 	return (
@@ -20,10 +19,8 @@ const Layout = ({ children }) => {
 						</Link>
 					</Box>
 					<Spacer />
-					<Box>
-						<EditIcon color='teal' />
-						<Popover />
-					</Box>
+					<Box></Box>
+					<AddTask inNav />
 				</Flex>
 			</Container>
 			{children}
